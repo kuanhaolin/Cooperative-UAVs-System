@@ -19,24 +19,11 @@ jobs:
       - name: Convert Word to PDF
         run: libreoffice --headless --convert-to pdf --outdir . proposal.docx
 
-      - name: Get latest tag
-        id: get_latest_tag
-        run: |
-          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "none")
-          echo "Latest tag: $latest_tag"
-          echo "::set-output name=latest_tag::$latest_tag"
-
-      - name: Calculate new tag
+      - name: Bump version and push tag
         id: tag_version
-        run: |
-          if [ "${{ steps.get_latest_tag.outputs.latest_tag }}" == "none" ]; then
-            new_tag="v1"
-          else
-            latest_tag=${{ steps.get_latest_tag.outputs.latest_tag }}
-            new_tag=v$(( ${latest_tag:1} + 1 ))
-          fi
-          echo "New tag: $new_tag"
-          echo "::set-output name=new_tag::$new_tag"
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          github_token: ${{ secrets.test }}
 
       - name: Create Release
         id: create_release
@@ -50,11 +37,12 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset
+        id: upload-release-asset 
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.test }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
           asset_path: ./proposal.pdf
           asset_name: proposal.pdf
           asset_content_type: application/pdf
