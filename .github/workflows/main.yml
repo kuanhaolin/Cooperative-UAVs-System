@@ -15,20 +15,19 @@ jobs:
       - name: Install pandoc and texlive-xetex
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex texlive-lang-chinese gsfonts fonts-moe-standard-kai ttf-mscorefonts-installer librsvg2-bin texlive-fonts-extra
+          sudo apt-get install -y pandoc texlive-latex-base
 
       - name: Convert Word to PDF
         run: |
-          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex
-
+          pandoc proposal.docx -o proposal.pdf
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.test }}
         with:
-          tag_name: v0.0.1
-          release_name: Release v0.0.1
+          tag_name: ${{ steps.tag_version.outputs.new_tag }}
+          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           draft: false
           prerelease: false
 
