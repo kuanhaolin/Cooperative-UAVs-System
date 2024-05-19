@@ -1,37 +1,44 @@
-name: Convert DOCX to PDF
+name: Convert Word to PDF
 
 on:
   push:
-    paths:
-      - '*.docx'
+    branches:
+      - main
+
 
 jobs:
-  convert-to-pdf:
+  convert:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x' # 选择你想要使用的 Python 版本
+      - name: Install pandoc and texlive-xetex
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install docx2pdf
+      - name: Convert Word to PDF
+        run: |
+          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex
 
-    - name: Convert DOCX to PDF
-      run: |
-        for file in *.docx; do
-          docx2pdf "$file"
-        done
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.test }}
+        with:
+          tag_name: v0.0.1
+          release_name: Release v0.0.1
+          draft: false
+          prerelease: false
 
-    - name: Upload PDF files
-      uses: actions/upload-artifact@v2
-      with:
-        name: pdf-files
-        path: |
-          *.pdf
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.test }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./proposal.pdf
+          asset_name: proposal.pdf
+          asset_content_type: application/pdf
