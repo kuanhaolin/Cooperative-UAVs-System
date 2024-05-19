@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'proposal.docx'
+
 
 jobs:
   convert:
@@ -13,10 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pandoc and texlive-latex-base
+      - name: Install pandoc and texlive-latex-extra
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base
+          sudo apt-get install -y pandoc texlive-latex-extra
 
       - name: Convert Word to PDF
         run: |
