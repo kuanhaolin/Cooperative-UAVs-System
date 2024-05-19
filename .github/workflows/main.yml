@@ -1,0 +1,29 @@
+name: Convert Word to PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'proposal.docx'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Convert Word to PDF
+        run: |
+          pandoc proposal.docx -o proposal.pdf
+
+      - name: Create Release and Upload PDF
+        id: create_release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./proposal.pdf
+          asset_name: proposal.pdf
+          asset_content_type: application/pdf
