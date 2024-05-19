@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'proposal.docx'
+
+
 
 jobs:
   convert:
