@@ -5,21 +5,20 @@ on:
     branches:
       - main
 
-
 jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pandoc and texlive-latex-extra
+      - name: Install pandoc and texlive-xetex
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-extra
+          sudo apt-get install -y pandoc texlive-xetex
 
       - name: Convert Word to PDF
         run: |
-          pandoc proposal.docx -o proposal.pdf
+          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex
 
       - name: Create Release and Upload PDF
         id: create_release
