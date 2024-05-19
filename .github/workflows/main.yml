@@ -15,7 +15,7 @@ jobs:
       - name: Install pandoc and texlive-xetex
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base
+          sudo apt-get install -y pandoc texlive-latex-base texlive-latex-extra texlive-xetex
 
       - name: Convert Word to PDF
         run: |
