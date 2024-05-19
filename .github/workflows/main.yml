@@ -24,7 +24,7 @@ jobs:
         pip install pypandoc
 
     - name: Convert Word to PDF
-      run: |
+      run: python convert.py |
         pypandoc.document.docx --to pdf -o document.pdf
 
     - name: Upload PDF
