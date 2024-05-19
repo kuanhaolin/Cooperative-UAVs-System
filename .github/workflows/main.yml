@@ -20,13 +20,13 @@ jobs:
       - name: Get latest tag
         id: get_latest_tag
         run: |
-          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "none")
           echo "::set-output name=latest_tag::$latest_tag"
 
       - name: Calculate new tag
         id: tag_version
         run: |
-          if [ -z "${{ steps.get_latest_tag.outputs.latest_tag }}" ]; then
+          if [ "${{ steps.get_latest_tag.outputs.latest_tag }}" == "none" ]; then
             new_tag="v1"
           else
             latest_tag=${{ steps.get_latest_tag.outputs.latest_tag }}
@@ -47,11 +47,4 @@ jobs:
 
       - name: Upload Release Asset
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./proposal.pdf
-          asset_name: proposal.pdf
-          asset_content_type: application/pdf
+        uses: actions/upload-release-as
