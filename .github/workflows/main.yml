@@ -2,6 +2,8 @@ name: Convert Word to PDF
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'proposal.docx'
 
