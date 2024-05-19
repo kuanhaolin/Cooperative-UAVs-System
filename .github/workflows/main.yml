@@ -19,7 +19,7 @@ jobs:
 
       - name: Convert Word to PDF
         run: |
-          pandoc proposal.docx -o proposal.pdf
+          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex --pdf-engine-opt=-shell-escape
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
