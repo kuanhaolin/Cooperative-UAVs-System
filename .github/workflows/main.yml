@@ -5,21 +5,28 @@ on:
     branches:
       - main
 
-
 jobs:
   convert:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Install pandoc and texlive-xetex
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: Install docx2pdf
         run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex
+          python -m pip install --upgrade pip
+          pip install docx2pdf
 
       - name: Convert Word to PDF
         run: |
-          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex
+          for file in *.docx; do
+            docx2pdf "$file"
+          done
 
       - name: Create Release
         id: create_release
