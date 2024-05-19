@@ -13,10 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pandoc
+      - name: Install pandoc and texlive-latex-base
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y pandoc texlive-latex-base
 
       - name: Convert Word to PDF
         run: |
