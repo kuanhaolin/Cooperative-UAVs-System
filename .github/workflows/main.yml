@@ -12,14 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install pandoc and texlive-xetex
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base texlive-latex-extra texlive-xetex
+      - name: Install LibreOffice
+        run: sudo apt-get install libreoffice --yes
 
-      - name: Convert Word to PDF
-        run: |
-          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex -V mainfont="Arial"
+       - name: Convert Word to PDF
+        run:
+          libreoffice --convert-to pdf proposal.docx
 
       - name: Create Release
         id: create_release
