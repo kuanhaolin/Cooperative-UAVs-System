@@ -23,6 +23,7 @@ jobs:
         id: get_latest_tag
         run: |
           latest_tag=$(git describe --tags `git rev-list --tags --max-count=1` 2>/dev/null || echo "none")
+          echo "Latest tag: $latest_tag"
           echo "::set-output name=latest_tag::$latest_tag"
 
       - name: Calculate new tag
@@ -34,6 +35,7 @@ jobs:
             latest_tag=${{ steps.get_latest_tag.outputs.latest_tag }}
             new_tag=v$(( ${latest_tag:1} + 1 ))
           fi
+          echo "New tag: $new_tag"
           echo "::set-output name=new_tag::$new_tag"
 
       - name: Create Release
