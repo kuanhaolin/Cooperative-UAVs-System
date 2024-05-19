@@ -19,7 +19,7 @@ jobs:
 
       - name: Convert Word to PDF
         run: |
-          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex -V mainfont="SimSun" -V CJKoptions="BoldFont=SimSun" -V CJKmainfont="SimSun"
+          pandoc proposal.docx -o proposal.pdf --pdf-engine=xelatex -V mainfont="Arial"
 
       - name: Create Release
         id: create_release
