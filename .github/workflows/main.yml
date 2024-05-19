@@ -14,12 +14,7 @@ jobs:
       - name: Install LibreOffice and Chinese fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y libreoffice fonts-arphic-uming
-          # Download and install SimSun font
-          wget -O /tmp/simsun.ttc https://github.com/dmhacker/simsun/raw/master/simsun.ttc
-          sudo mkdir -p /usr/share/fonts/truetype/simsun
-          sudo mv /tmp/simsun.ttc /usr/share/fonts/truetype/simsun/simsun.ttc
-          sudo fc-cache -fv
+          sudo apt-get install -y libreoffice ttf-wqy-zenhei ttf-wqy-microhei
 
       - name: Convert Word to PDF
         run: libreoffice --headless --convert-to pdf --outdir . proposal.docx
