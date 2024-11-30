@@ -1,0 +1,18 @@
+安裝UE VS2022 AirSim
+https://blog.csdn.net/qq_45709806/article/details/136062458
+
+安裝編譯環境
+https://www.bilibili.com/read/cv23783140/
+python3.9.13
+Anaconda3-2022.10-Windows-x86_64 (3.9.13)
+pycharm-community-2024.2.2
+
+安裝airsim
+pip install numpy
+pip install msgpack-rpc-python
+pip install airsim
+
+創建C++檔案 會建立一個.sln檔
+
+Plugins是airsim插件 需要丟到ue專案資料夾 
+
