@@ -1,0 +1,70 @@
+{
+	"SeeDocsAt": "https://github.com/Microsoft/AirSim/blob/main/docs/settings.md",
+	"SettingsVersion": 1.2,
+	"SimMode": "Multirotor",
+	"Vehicles":{
+		"Drone0":{
+			"VehicleType": "SimpleFlight",
+			"X": 0,
+			"Y": 0,
+			"Z": 0,
+			"Pitch": 0,
+			"Yaw": 0,
+			"Model": "GenericQuadRotor",
+			"EnableCollisionPassthrough":false
+		},
+		"Drone1":{
+			"VehicleType": "SimpleFlight",
+			"X": 2,
+			"Y": 0,
+			"Z": 0,
+			"Pitch": 0,
+			"Yaw": 0,
+			"Model": "GenericQuadRotor",
+			"EnableCollisionPassthrough":false
+		},
+		"Drone2":{
+			"VehicleType": "SimpleFlight",
+			"X": 4,
+			"Y": 0,
+			"Z": 0,
+			"Pitch": 0,
+			"Yaw": 0,
+			"Model": "GenericQuadRotor",
+			"EnableCollisionPassthrough":false
+		}
+	},
+	"//": "影像視窗",
+	"SubWindows":[
+	   {
+		   "WindowID": 0,
+		   "CameraName": "0",
+		   "ImageType": 0,
+		   "VehicleName": "Drone0",
+		   "Visible": true,
+		   "ImageSize": [480, 270],
+		   "CameraPosition": [0.0, 0.0, -2.5],
+		   "CameraRotation": [0.0, 0.0, 0.0]
+	   },
+	   {
+		   "WindowID": 1,
+		   "CameraName": "0",
+		   "ImageType": 3,
+		   "VehicleName": "Drone1",
+		   "Visible": true,
+		   "ImageSize": [480, 270],
+		   "CameraPosition": [0.0, 0.0, -2.5],
+		   "CameraRotation": [0.0, 0.0, 0.0]
+	   },
+	   {
+		   "WindowID": 2,
+		   "CameraName": "0",
+		   "ImageType": 5,
+		   "VehicleName": "Drone2",
+		   "Visible": true,
+		   "ImageSize": [480, 270],
+		   "CameraPosition": [0.0, 0.0, -2.5],
+		   "CameraRotation": [0.0, 0.0, 0.0]
+	   }
+	]
+}

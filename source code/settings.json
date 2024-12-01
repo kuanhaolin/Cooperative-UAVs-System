@@ -1,0 +1,44 @@
+{
+    "SettingsVersion": 1.2,
+    "SimMode": "Multirotor",
+    "Vehicles": {
+        "Drone0": {
+            "VehicleType": "SimpleFlight",
+            "X": 0,
+            "Y": 0,
+            "Z": 0,
+            "Pitch": 0,
+			"Yaw": 0,
+            "Sensors": {
+                "LidarSensor1": {
+                    "SensorType": 6,
+                    "Range": 10,
+                    "Enabled": true,
+
+                    "NumberOfChannels": 1,
+                    "PointsPerSecond": 10,
+                    "RotationsPerSecond": 0,
+
+                    "VerticalFOVUpper": 0,
+                    "VerticalFOVLower": 0,
+                    "HorizontalFOVStart": -180,
+                    "HorizontalFOVEnd": 180,
+
+                    "DrawDebugPoints": true,
+                    "DataFrame": "SensorLocalFrame",
+                    "X": 0, "Y": -0.5, "Z": 0,
+                    "Pitch": 0,
+			        "Yaw": 0
+                }
+            }
+        },
+        "Drone1":{
+			"VehicleType": "SimpleFlight",
+			"X": -2,
+			"Y": 0,
+			"Z": 0,
+			"Pitch": 0,
+			"Yaw": 0
+        }
+    }
+}
